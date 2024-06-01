@@ -31,10 +31,12 @@ DEBUG = getenv('DEBUG', "False") == 'True'
 # DEBUG = 'True'
 
 ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS',
-                       '127.0.0.1,localhost').split(',')
+                       '127.0.0.1,localhost,localhost:3000,http://localhost:3000/').split(',')
+
 
 
 # corsheaders setting start
+CORS_ALLOW_HEADERS = '*'
 
 CORS_ALLOWED_ORIGINS = getenv(
     'CORS_ALLOWED_ORIGINS',
@@ -52,9 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 
     'rest_framework',
-    'corsheaders',
 
     'yelp'
 ]
