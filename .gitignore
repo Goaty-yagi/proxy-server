@@ -1,0 +1,5 @@
+venv/
+env.local
+db.sqlite3
+.vercel
+__pycache__/
