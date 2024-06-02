@@ -33,7 +33,7 @@ DEBUG = getenv('DEBUG', "False") == 'True'
 ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS',
                        '127.0.0.1,localhost,localhost:3000,http://localhost:3000/').split(',')
 
-ALLOWED_HOSTS = '*'
+ALLOWED_HOSTS = ['*']
 
 
 # corsheaders setting start
