@@ -19,13 +19,20 @@ class YelpApi(APIView):
             return Response({'message': 'Invalid or missing endpoint'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
-            key = getenv('YELP_API_KEY')
-            if not key:
+            keys = getenv('YELP_API_KEY')
+            if not keys:
                 raise EnvironmentError("YELP_API_KEY not set in environment")
             
-            response = requests.get(endpoint, headers={
+            keyList = keys.split(',')
+            for key in keyList:
+                response = requests.get(endpoint, headers={
                 'Authorization': f"Bearer {key}"
-            })
+                })
+                if response.status_code == 200:
+                    break
+                elif response.status_code == 429:
+                    pass
+
             response.raise_for_status()
             data = response.json()
             return Response(data, status=status.HTTP_200_OK)
@@ -37,4 +44,3 @@ class YelpApi(APIView):
         except Exception as err:
             return Response({'message': f"An unexpected error occurred: {err}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    
